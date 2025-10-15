@@ -16,7 +16,7 @@ app.use(
 
 app.use(express.json());
 
-// ✅ TEMPORARY: Basic routes without auth dependencies
+// ✅ Basic routes
 app.get("/", (req, res) => {
   res.json({ 
     message: "Server is running! 🚀",
@@ -33,20 +33,21 @@ app.get("/health", (req, res) => {
   });
 });
 
-// ✅ TEMPORARY: Comment out problematic routes until we fix User model
-// const authRoutes = require("./routes/authRoutes");
+// ✅ STEP 1: Add back ONLY auth routes first
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
+
+// ❌ Keep other routes commented out for now
 // const postRoutes = require("./routes/postRoutes");
 // const replyRoutes = require("./routes/replyRoutes");
 // const userRoutes = require("./routes/userRoutes");
-
-// app.use("/api/auth", authRoutes);
 // app.use("/api/posts", postRoutes);
 // app.use("/api/replies", replyRoutes);
 // app.use("/api/users", userRoutes);
 // app.use("/api/comments", require("./routes/commentRoutes"));
 // app.use("/uploads", express.static("uploads"));
 
-// MongoDB Connect (optional for now)
+// MongoDB Connect
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
