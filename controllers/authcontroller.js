@@ -1,4 +1,8 @@
-const User = require('../models/User');
+
+const User = require('../models/User.js');
+
+// Or if that doesn't work, try absolute path
+const User = require(`${process.cwd()}/models/User`);
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
