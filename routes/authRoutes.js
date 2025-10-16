@@ -1,8 +1,10 @@
-import express from"express";
-import router from express.Router();
-export const { signup, login } = require("../controllers/authcontroller");
+import express from "express";
+const router = express.Router(); // ✅ Router initialize sahi tarike se
 
+import { signup, login } from "../controllers/authcontroller.js"; // ✅ ES6 import
+
+// ✅ Routes
 router.post("/signup", signup);
 router.post("/login", login);
 
-//module.exports = router;
+export default router;

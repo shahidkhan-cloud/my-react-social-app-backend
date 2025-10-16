@@ -1,12 +1,13 @@
 // backend/routes/commentRoutes.js
 import express from "express";
-import router from express.Router();
-import Comment from"../models/Comment";
-import Post from "../models/Post";
-import protect from "../middleware/authMiddleware"; // ✅ fixed import
+const router = express.Router(); // ✅ Router sahi initialize
+
+import { Comment } from "../models/Comment.js"; // ✅ ES6 import
+import { Post } from "../models/Post.js";
+import { protect } from "../middleware/authMiddleware.js"; // ✅ ES6 import
 
 // DELETE a comment
- router.delete("/:id", protect, async (req, res) => {
+router.delete("/:id", protect, async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.id);
     if (!comment) {
@@ -33,4 +34,4 @@ import protect from "../middleware/authMiddleware"; // ✅ fixed import
   }
 });
 
-module.exports = router;
+export default router;

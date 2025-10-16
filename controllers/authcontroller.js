@@ -1,13 +1,9 @@
-
-//const User = require('./models/User');
-import User from '../models/User.js';
-
-// Or if that doesn't work, try absolute path
-//const User = require(`${process.cwd()}/models/User`);
+// backend/controllers/authController.js
+import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-// SIGNUP
+// ✅ SIGNUP
 export const signup = async (req, res) => {
   try {
     const { username, bio, password, profilePic } = req.body;
@@ -41,7 +37,7 @@ export const signup = async (req, res) => {
   }
 };
 
-// LOGIN
+// ✅ LOGIN
 export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -81,5 +77,3 @@ export const login = async (req, res) => {
     res.status(500).json({ message: "Server error ❌" });
   }
 };
-
-// module.exports = { signup, login };

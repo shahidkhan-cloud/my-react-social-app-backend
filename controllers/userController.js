@@ -1,3 +1,6 @@
+// backend/controllers/userController.js
+import { User } from "../models/User.js";
+
 // PUT /api/users/:id/upload
 export const uploadProfilePic = async (req, res) => {
   try {
@@ -25,5 +28,3 @@ export const uploadProfilePic = async (req, res) => {
     res.status(500).json({ message: "Server error ❌" });
   }
 };
-
-//module.exports = { uploadProfilePic };

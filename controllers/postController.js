@@ -1,6 +1,7 @@
-import Post from "../models/Post";
-import Comment from "../models/Comment";
-import Reply from "../models/Reply";
+// backend/controllers/postController.js
+import { Post } from "../models/Post.js";
+import { Comment } from "../models/Comment.js";
+import { Reply } from "../models/Reply.js";
 import mongoose from "mongoose";
 
 // ✅ Create a new post
@@ -212,7 +213,6 @@ export const deletePost = async (req, res) => {
 };
 
 // ✅ Delete Comment
-// commentController.js or inside commentRoutes.js
 export const deleteComment = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.commentId);
@@ -220,23 +220,17 @@ export const deleteComment = async (req, res) => {
     if (!comment)
       return res.status(404).json({ message: "Comment not found" });
 
-    // Only allow the owner of the comment or post owner to delete
     if (String(comment.user) !== String(req.user._id)) {
       return res.status(403).json({ message: "Not authorized" });
     }
 
-    // ✅ Use deleteOne instead of remove (remove is deprecated)
     await comment.deleteOne();
-
     res.status(200).json({ message: "Comment deleted successfully" });
   } catch (error) {
     console.error("❌ Error deleting comment:", error);
     res.status(500).json({ message: "Server error deleting comment" });
   }
 };
-
-
-
 
 // ✅ Delete Reply
 export const deleteReply = async (req, res) => {
@@ -255,18 +249,3 @@ export const deleteReply = async (req, res) => {
     res.status(500).json({ message: "Failed to delete reply", error: err.message });
   }
 };
-
-// ✅ Export all
-//module.exports = {
- // createPost,
- // getAllPosts,
- // toggleLike,
- // addComment,
- // toggleCommentLike,
- // toggleReplyLike,
- // getPostsByUser,
- // updatePost,
- // deletePost,
- // deleteComment,
- // deleteReply,
-//};

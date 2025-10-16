@@ -1,6 +1,7 @@
 import express from "express";
-import router from express.Router();
-export const {
+const router = express.Router(); // ✅ router ko import sahi tarike se
+
+import {
   createPost,
   getAllPosts,
   toggleLike,
@@ -8,11 +9,11 @@ export const {
   toggleCommentLike,
   toggleReplyLike,
   getPostsByUser,
-  updatePost,     // ✅ new
-  deletePost,     // ✅ new
-} = require("../controllers/postController");
+  updatePost,
+  deletePost,
+} from "../controllers/postController.js"; // ✅ correct import path
 
-export const protect = require("../middleware/authMiddleware");
+import { protect } from "../middleware/authMiddleware.js"; // ✅ correct import
 
 // ✅ Create a new post
 router.post("/create", protect, createPost);
@@ -24,10 +25,10 @@ router.get("/", getAllPosts);
 router.post("/:id/like", protect, toggleLike);
 
 // ✅ Edit a post
-router.put("/:id", protect, updatePost);   // ✅ new
+router.put("/:id", protect, updatePost);
 
 // ✅ Delete a post
-router.delete("/:id", protect, deletePost); // ✅ new
+router.delete("/:id", protect, deletePost);
 
 // ✅ Add a comment
 router.post("/:id/comment", protect, addComment);
@@ -41,4 +42,4 @@ router.post("/reply/:id/like", protect, toggleReplyLike);
 // ✅ Get posts by user
 router.get("/user/:userId", getPostsByUser);
 
-//module.exports = router;
+export default router;

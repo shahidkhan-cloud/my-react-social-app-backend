@@ -1,14 +1,16 @@
-import express from require("express");
-import router from express.Router();
-import bcrypt from"bcryptjs";
-import User from "../models/User";
+// backend/routes/userRoutes.js
+import express from "express";
+const router = express.Router(); // ✅ Router sahi initialize
+
+import bcrypt from "bcryptjs";
+import { User } from "../models/User.js"; // ✅ ES6 import with .js
 import cloudinary from "cloudinary";
 
 // 🟢 Cloudinary config
-cloudinary.config({
+cloudinary.v2.config({
   cloud_name: "ddxuael58", // 🔹 your cloud name
-  api_key: "142743491188937", // 🔹 replace with your Cloudinary API key
-  api_secret: "emRfjOtJSPV77IzZkcGaODu0Gs8", // 🔹 replace with your Cloudinary secret
+  api_key: "142743491188937", // 🔹 your Cloudinary API key
+  api_secret: "emRfjOtJSPV77IzZkcGaODu0Gs8", // 🔹 your Cloudinary secret
 });
 
 // 🟩 Get a user by ID
@@ -69,4 +71,4 @@ router.delete("/:userId", async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;

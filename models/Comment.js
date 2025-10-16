@@ -1,6 +1,7 @@
+// backend/models/Comment.js
 import mongoose from "mongoose";
 
-export const commentSchema = new mongoose.Schema(
+const commentSchema = new mongoose.Schema(
   {
     post: { type: mongoose.Schema.Types.ObjectId, ref: "Post", required: true },
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
@@ -11,4 +12,5 @@ export const commentSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Comment", commentSchema);
+// ✅ Prevent OverwriteModelError
+export const Comment = mongoose.models.Comment || mongoose.model("Comment", commentSchema);

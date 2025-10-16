@@ -1,6 +1,7 @@
-import mongoose from"mongoose";
+// backend/models/Post.js
+import mongoose from "mongoose";
 
-export const postSchema = new mongoose.Schema(
+const postSchema = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.Types.ObjectId,
@@ -30,4 +31,5 @@ export const postSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-//module.exports = mongoose.model("Post", postSchema);
+// ✅ Prevent OverwriteModelError
+export const Post = mongoose.models.Post || mongoose.model("Post", postSchema);

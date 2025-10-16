@@ -1,6 +1,8 @@
-import Reply from "../models/Reply";
-import Comment from"../models/Comment";
-import User from "../models/User";
+// backend/controllers/replyController.js
+import { Reply } from "../models/Reply.js";
+import { Comment } from "../models/Comment.js";
+import { User } from "../models/User.js";
+import { Post } from "../models/Post.js";
 
 // ✅ Get all replies for a specific comment
 export const getRepliesByComment = async (req, res) => {
@@ -41,10 +43,9 @@ export const createReply = async (req, res) => {
     res.status(500).json({ message: "Failed to add reply" });
   }
 };
-// ✅ Delete a reply (only post owner can delete)
-export const Post = require("../models/Post");
 
-const deleteReply = async (req, res) => {
+// ✅ Delete a reply (only post owner can delete)
+export const deleteReply = async (req, res) => {
   try {
     const reply = await Reply.findById(req.params.replyId).populate({
       path: "comment",
@@ -75,9 +76,7 @@ const deleteReply = async (req, res) => {
   }
 };
 
-
 // ✅ Like or unlike a reply
-
 export const toggleReplyLike = async (req, res) => {
   try {
     const reply = await Reply.findById(req.params.replyId);
@@ -106,11 +105,3 @@ export const toggleReplyLike = async (req, res) => {
     res.status(500).json({ message: "Failed to toggle like" });
   }
 };
-
-
-//module.exports = {
-  //getRepliesByComment,
-  //createReply,
-  //toggleReplyLike,
-   //deleteReply,
-//};
