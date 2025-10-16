@@ -1,5 +1,7 @@
 // backend/controllers/authController.js
 import { User } from "../models/User.js";
+//const User = require("../models/User");
+
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
