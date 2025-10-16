@@ -1,10 +1,10 @@
-const Post = require("../models/Post");
-const Comment = require("../models/Comment");
-const Reply = require("../models/Reply");
-const mongoose = require("mongoose");
+import Post from "../models/Post";
+import Comment from "../models/Comment";
+import Reply from "../models/Reply";
+import mongoose from "mongoose";
 
 // ✅ Create a new post
-const createPost = async (req, res) => {
+export const createPost = async (req, res) => {
   try {
     const userId = req.user._id;
     const { text, images } = req.body;
@@ -32,7 +32,7 @@ const createPost = async (req, res) => {
 };
 
 // ✅ Get all posts
-const getAllPosts = async (req, res) => {
+export const getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find()
       .populate("user", "username profilePic")
@@ -51,7 +51,7 @@ const getAllPosts = async (req, res) => {
 };
 
 // ✅ Get posts by specific user
-const getPostsByUser = async (req, res) => {
+export const getPostsByUser = async (req, res) => {
   try {
     const userId = req.params.userId;
 
@@ -79,7 +79,7 @@ const getPostsByUser = async (req, res) => {
 };
 
 // ✅ Like / Unlike a Post
-const toggleLike = async (req, res) => {
+export const toggleLike = async (req, res) => {
   try {
     const postId = req.params.id;
     const userId = req.user._id;
@@ -105,7 +105,7 @@ const toggleLike = async (req, res) => {
 };
 
 // ✅ Add Comment
-const addComment = async (req, res) => {
+export const addComment = async (req, res) => {
   try {
     const postId = req.params.id;
     const userId = req.user._id;
@@ -125,7 +125,7 @@ const addComment = async (req, res) => {
 };
 
 // ✅ Like / Unlike a Comment
-const toggleCommentLike = async (req, res) => {
+export const toggleCommentLike = async (req, res) => {
   try {
     const commentId = req.params.id;
     const userId = req.user._id;
@@ -151,7 +151,7 @@ const toggleCommentLike = async (req, res) => {
 };
 
 // ✅ Like / Unlike a Reply
-const toggleReplyLike = async (req, res) => {
+export const toggleReplyLike = async (req, res) => {
   try {
     const replyId = req.params.id;
     const userId = req.user._id;
@@ -177,7 +177,7 @@ const toggleReplyLike = async (req, res) => {
 };
 
 // ✅ Edit Post
-const updatePost = async (req, res) => {
+export const updatePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
@@ -196,7 +196,7 @@ const updatePost = async (req, res) => {
 };
 
 // ✅ Delete Post
-const deletePost = async (req, res) => {
+export const deletePost = async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ message: "Post not found" });
@@ -213,7 +213,7 @@ const deletePost = async (req, res) => {
 
 // ✅ Delete Comment
 // commentController.js or inside commentRoutes.js
-const deleteComment = async (req, res) => {
+export const deleteComment = async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.commentId);
 
@@ -239,7 +239,7 @@ const deleteComment = async (req, res) => {
 
 
 // ✅ Delete Reply
-const deleteReply = async (req, res) => {
+export const deleteReply = async (req, res) => {
   try {
     const reply = await Reply.findById(req.params.id);
     if (!reply) return res.status(404).json({ message: "Reply not found" });
@@ -257,16 +257,16 @@ const deleteReply = async (req, res) => {
 };
 
 // ✅ Export all
-module.exports = {
-  createPost,
-  getAllPosts,
-  toggleLike,
-  addComment,
-  toggleCommentLike,
-  toggleReplyLike,
-  getPostsByUser,
-  updatePost,
-  deletePost,
-  deleteComment,
-  deleteReply,
-};
+//module.exports = {
+ // createPost,
+ // getAllPosts,
+ // toggleLike,
+ // addComment,
+ // toggleCommentLike,
+ // toggleReplyLike,
+ // getPostsByUser,
+ // updatePost,
+ // deletePost,
+ // deleteComment,
+ // deleteReply,
+//};

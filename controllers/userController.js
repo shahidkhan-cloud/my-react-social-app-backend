@@ -1,5 +1,5 @@
 // PUT /api/users/:id/upload
-const uploadProfilePic = async (req, res) => {
+export const uploadProfilePic = async (req, res) => {
   try {
     const { profilePic } = req.body; // Cloudinary image URL
     const userId = req.params.id;
@@ -26,4 +26,4 @@ const uploadProfilePic = async (req, res) => {
   }
 };
 
-module.exports = { uploadProfilePic };
+//module.exports = { uploadProfilePic };

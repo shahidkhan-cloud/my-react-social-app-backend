@@ -8,7 +8,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 // SIGNUP
-const signup = async (req, res) => {
+export const signup = async (req, res) => {
   try {
     const { username, bio, password, profilePic } = req.body;
 
@@ -42,7 +42,7 @@ const signup = async (req, res) => {
 };
 
 // LOGIN
-const login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
 
@@ -82,4 +82,4 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { signup, login };
+// module.exports = { signup, login };

@@ -1,12 +1,12 @@
 // backend/routes/commentRoutes.js
-const express = require("express");
-const router = express.Router();
-const Comment = require("../models/Comment");
-const Post = require("../models/Post");
-const protect = require("../middleware/authMiddleware"); // ✅ fixed import
+import express from "express";
+import router from express.Router();
+import Comment from"../models/Comment";
+import Post from "../models/Post";
+import protect from "../middleware/authMiddleware"; // ✅ fixed import
 
 // DELETE a comment
-router.delete("/:id", protect, async (req, res) => {
+ router.delete("/:id", protect, async (req, res) => {
   try {
     const comment = await Comment.findById(req.params.id);
     if (!comment) {

@@ -1,6 +1,6 @@
-const mongoose = require("mongoose");
+import  mongoose from "mongoose";
 
-const userSchema = new mongoose.Schema(
+export const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     //email: { type: String, : true, unique: true },
@@ -12,4 +12,4 @@ const userSchema = new mongoose.Schema(
 );
 
 // ✅ Prevent OverwriteModelError
-module.exports = mongoose.models.User || mongoose.model("User", userSchema);
+//module.exports = mongoose.models.User || mongoose.model("User", userSchema);

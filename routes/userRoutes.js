@@ -1,8 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const bcrypt = require("bcryptjs");
-const User = require("../models/User");
-const cloudinary = require("cloudinary").v2;
+import express from require("express");
+import router from express.Router();
+import bcrypt from"bcryptjs";
+import User from "../models/User";
+import cloudinary from "cloudinary";
 
 // 🟢 Cloudinary config
 cloudinary.config({

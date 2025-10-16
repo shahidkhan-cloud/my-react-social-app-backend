@@ -1,6 +1,6 @@
-const express = require("express");
-const router = express.Router();
-const {
+import express from "express";
+import router from express.Router();
+export const {
   createPost,
   getAllPosts,
   toggleLike,
@@ -12,7 +12,7 @@ const {
   deletePost,     // ✅ new
 } = require("../controllers/postController");
 
-const protect = require("../middleware/authMiddleware");
+export const protect = require("../middleware/authMiddleware");
 
 // ✅ Create a new post
 router.post("/create", protect, createPost);
@@ -41,4 +41,4 @@ router.post("/reply/:id/like", protect, toggleReplyLike);
 // ✅ Get posts by user
 router.get("/user/:userId", getPostsByUser);
 
-module.exports = router;
+//module.exports = router;

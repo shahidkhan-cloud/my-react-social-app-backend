@@ -1,9 +1,9 @@
-const Reply = require("../models/Reply");
-const Comment = require("../models/Comment");
-const User = require("../models/User");
+import Reply from "../models/Reply";
+import Comment from"../models/Comment";
+import User from "../models/User";
 
 // ✅ Get all replies for a specific comment
-const getRepliesByComment = async (req, res) => {
+export const getRepliesByComment = async (req, res) => {
   try {
     const replies = await Reply.find({ comment: req.params.commentId })
       .populate("user", "username profilePic")
@@ -16,7 +16,7 @@ const getRepliesByComment = async (req, res) => {
 };
 
 // ✅ Create a new reply
-const createReply = async (req, res) => {
+export const createReply = async (req, res) => {
   try {
     const userId = req.user._id;
     const { text } = req.body;
@@ -42,7 +42,7 @@ const createReply = async (req, res) => {
   }
 };
 // ✅ Delete a reply (only post owner can delete)
-const Post = require("../models/Post");
+export const Post = require("../models/Post");
 
 const deleteReply = async (req, res) => {
   try {
@@ -78,7 +78,7 @@ const deleteReply = async (req, res) => {
 
 // ✅ Like or unlike a reply
 
-const toggleReplyLike = async (req, res) => {
+export const toggleReplyLike = async (req, res) => {
   try {
     const reply = await Reply.findById(req.params.replyId);
     if (!reply) return res.status(404).json({ message: "Reply not found" });
@@ -108,9 +108,9 @@ const toggleReplyLike = async (req, res) => {
 };
 
 
-module.exports = {
-  getRepliesByComment,
-  createReply,
-  toggleReplyLike,
-   deleteReply,
-};
+//module.exports = {
+  //getRepliesByComment,
+  //createReply,
+  //toggleReplyLike,
+   //deleteReply,
+//};

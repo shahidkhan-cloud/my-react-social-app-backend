@@ -1,12 +1,12 @@
-const express = require("express");
-const router = express.Router();
-const {
+import express from require("express");
+import router from express.Router();
+export const {
   getRepliesByComment,
   createReply,
   toggleReplyLike,
   deleteReply, // ✅ newly added controller
 } = require("../controllers/replyController");
-const protect = require("../middleware/authMiddleware");
+export const protect = require("../middleware/authMiddleware");
 
 // ✅ Get all replies of a comment
 router.get("/:commentId", getRepliesByComment);
@@ -22,4 +22,4 @@ router.post("/:replyId/like", protect, toggleReplyLike);
 router.delete("/:replyId", protect, deleteReply);
 
 
-module.exports = router;
+//module.exports = router;
