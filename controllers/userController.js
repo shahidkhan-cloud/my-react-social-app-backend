@@ -1,6 +1,7 @@
 // backend/controllers/userController.js
 import { User } from "../models/User.js";
 
+// ✅ Upload or update user profile picture
 // PUT /api/users/:id/upload
 export const uploadProfilePic = async (req, res) => {
   try {

@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
-// ✅ Load env variables
+// ✅ Load environment variables
 dotenv.config();
 
 const app = express();
@@ -39,20 +39,22 @@ app.get("/health", (req, res) => {
   });
 });
 
-// ✅ Routes (ES6 import)
+// ✅ Import Routes (ES6)
 import authRoutes from "./routes/authRoutes.js";
-// import postRoutes from "./routes/postRoutes.js";
-// import replyRoutes from "./routes/replyRoutes.js";
-// import userRoutes from "./routes/userRoutes.js";
-// import commentRoutes from "./routes/commentRoutes.js";
+import postRoutes from "./routes/postRoutes.js";
+import replyRoutes from "./routes/replyRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import commentRoutes from "./routes/commentRoutes.js";
 
-// Use routes
+// ✅ Use Routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/posts", postRoutes);
-// app.use("/api/replies", replyRoutes);
-// app.use("/api/users", userRoutes);
-// app.use("/api/comments", commentRoutes);
-// app.use("/uploads", express.static("uploads"));
+app.use("/api/posts", postRoutes);
+app.use("/api/replies", replyRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/comments", commentRoutes);
+
+// ✅ Static folder (optional, for uploads)
+app.use("/uploads", express.static("uploads"));
 
 // ✅ MongoDB Connect
 mongoose
