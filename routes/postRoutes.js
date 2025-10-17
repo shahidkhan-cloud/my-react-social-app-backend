@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router(); // ✅ router ko import sahi tarike se
-import { verifyToken } from "../middleware/authMiddleware.js";
-router.post("/create", verifyToken, createPost);
+//import { verifyToken } from "../middleware/authMiddleware.js";
+//router.post("/create", verifyToken, createPost);
 
 import {
   createPost,
