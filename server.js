@@ -10,17 +10,21 @@ dotenv.config();
 const app = express();
 
 // ✅ Middleware
-app.use(cors({ origin: '*' }));
+//app.use(cors({ origin: '*' }));
 app.use(express.json());
 
 // ✅ Restrict CORS to frontend
+// ✅ Middleware
 app.use(
   cors({
     origin: ["https://my-react-social-app-backend-dtyc.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
+
+app.use(express.json());
+
 
 // ✅ Basic routes
 app.get("/", (req, res) => {
