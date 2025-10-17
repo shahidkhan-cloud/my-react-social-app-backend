@@ -16,7 +16,7 @@ app.use(express.json());
 // ✅ Restrict CORS to frontend
 app.use(
   cors({
-    origin: ["https://my-react-social-app.vercel.app"],
+    origin: ["https://my-react-social-app-backend-dtyc.vercel.app"],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
