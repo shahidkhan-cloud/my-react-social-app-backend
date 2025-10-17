@@ -11,19 +11,24 @@ export const signup = async (req, res) => {
   try {
     const { username, bio, password, profilePic } = req.body;
 
-    if (!username || !bio || !password) {
+    // 🧩 Debug log (see what data is actually coming)
+    console.log("📥 Signup request received:", req.body);
+
+    // ✅ Field validation
+    if (!username || !bio || !password || !profilePic) {
       return res.status(400).json({ message: "All fields are required!" });
     }
 
-    // check if user exists
+    // ✅ Check if user already exists
     const existingUser = await User.findOne({ username });
     if (existingUser) {
       return res.status(400).json({ message: "Username already taken!" });
     }
 
-    // hash password
+    // ✅ Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // ✅ Create new user
     const newUser = new User({
       username,
       bio,
@@ -31,12 +36,15 @@ export const signup = async (req, res) => {
       password: hashedPassword,
     });
 
-    await newUser.save();
+    // ✅ Save to MongoDB
+    const savedUser = await newUser.save();
+    console.log("✅ New user saved:", savedUser._id);
 
+    // ✅ Response
     res.status(201).json({ message: "User created successfully ✅" });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Server error ❌" });
+    console.error("❌ Signup error:", err.message);
+    res.status(500).json({ message: err.message || "Server error ❌" });
   }
 };
 
