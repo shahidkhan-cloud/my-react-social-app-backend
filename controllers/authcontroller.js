@@ -1,6 +1,6 @@
 // backend/controllers/authController.js
-import { User } from "../models/User.js";
-//const User = require("../models/User");
+//import { User } from "../models/User.js";
+import User from "../models/User.js";
 
 
 import bcrypt from "bcryptjs";
