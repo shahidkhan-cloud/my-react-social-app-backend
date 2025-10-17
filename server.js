@@ -4,46 +4,39 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 
-// ✅ Load environment variables
 dotenv.config();
-
 const app = express();
 
-// ✅ Middleware
-//app.use(cors({ origin: '*' }));
-app.use(express.json());
+// ✅ CORS - only allow your frontend domain
+const allowedOrigins = [
+  "https://my-react-social-app-backend-dtyc.vercel.app", // your frontend domain
+];
 
-// ✅ Restrict CORS to frontend
-// ✅ Middleware
 app.use(
   cors({
-    origin: ["https://my-react-social-app-backend-dtyc.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (Postman, server-to-server) or from allowedOrigins
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
 app.use(express.json());
 
-
-// ✅ Basic routes
-app.get("/", (req, res) => {
-  res.json({ 
-    message: "Server is running! 🚀",
-    status: "OK",
-    timestamp: new Date().toISOString()
-  });
+// ✅ Debug request origins (optional, helps verify in Vercel logs)
+app.use((req, res, next) => {
+  console.log("Request Origin:", req.headers.origin);
+  next();
 });
 
-app.get("/health", (req, res) => {
-  res.json({ 
-    status: "Healthy ✅",
-    database: mongoose.connection.readyState === 1 ? "Connected ✅" : "Not connected ❌",
-    timestamp: new Date().toISOString()
-  });
-});
-
-// ✅ Import Routes (ES6)
+// ✅ Routes imports
 import authRoutes from "./routes/authRoutes.js";
 import postRoutes from "./routes/postRoutes.js";
 import replyRoutes from "./routes/replyRoutes.js";
@@ -57,22 +50,22 @@ app.use("/api/replies", replyRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/comments", commentRoutes);
 
-// ✅ Static folder (optional, for uploads)
-app.use("/uploads", express.static("uploads"));
+// ✅ Basic test route
+app.get("/", (req, res) => {
+  res.json({ message: "🚀 Backend is running successfully!", time: new Date().toISOString() });
+});
 
-// ✅ MongoDB Connect
+// ✅ MongoDB connection
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => console.log("✅ MongoDB Connected"))
-  .catch((err) => console.log("❌ MongoDB Error:", err));
+  .catch((err) => console.error("❌ MongoDB Connection Error:", err));
 
-// ✅ Start Server
+// ✅ Start Server (for local dev only)
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
 
 export default app;
