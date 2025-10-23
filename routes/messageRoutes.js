@@ -1,12 +1,12 @@
-import express from "express";
-import { sendMessage, getMessages } from "../controllers/messageController.js";
+// import express from "express";
+// import { sendMessage, getMessages } from "../controllers/messageController.js";
 
-const router = express.Router();
+// const router = express.Router();
 
-// Send message
-router.post("/send", sendMessage);
+// // Send message
+// router.post("/send", sendMessage);
 
-// Get conversation
-router.get("/:user1/:user2", getMessages);
+// // Get conversation
+// router.get("/:user1/:user2", getMessages);
 
-export default router;
+// export default router;
