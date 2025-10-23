@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
 // add near top with other imports
-import { startSocketServer } from "./socketServer.js";
+//import { startSocketServer } from "./socketServer.js";
 // (agar tumne socketServer.js ko alag file me banaya hai jaisa pehle discuss hua)
 
 import authRoutes from "./routes/authRoutes.js";
